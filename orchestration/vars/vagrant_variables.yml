@@ -4,7 +4,8 @@ ubuntu_common_deploy_public_keys: ~/.ssh/id_rsa.pub                             
 ubuntu_common_ssh_port: 22                                                        # If we configure this port our setup.yml file will configure ssh on a different port
 
 rootuser: 'root'
-rootpassword_NoisyAtom-Portal: ''
+rootpassword_NoisyAtom-Portal: '5AJodkqyJ9y6d3FV7VMZyorbF7vNmFsBWux4Ewiw'
+rootpassword_NoisyAtom-Portal_Ubuntu14: ''
 adminuser: 'na_admin'
 adminpassword: ''
 cmsuser: 'na_cms'

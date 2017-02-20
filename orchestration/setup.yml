@@ -8,7 +8,8 @@
 
 ---
 #- hosts: chh-dev
-- hosts: NoisyAtom-Portal
+#- hosts: NoisyAtom-Portal
+- hosts: NoisyAtomUbuntu14
   user: root
   gather_facts: False
 
@@ -25,13 +26,13 @@
   # Setup python on the system before doing anything else. On ubuntu 16 python is not in the normal dir,
   # so we install a verions directly into Ubuntu at a version which works. We also have a change to the
   # hosts file to manually point ansible to the correct directory after we have installed it.
-  - name: Setup | update aptitude on our machine
-    raw: apt-get update -qq
-  - name: Setup | Install python 2.7 since this is a Ubuntu 16 machine
-    raw: apt-get install -qq python2.7
+  #- name: Setup | update aptitude on our machine
+  #  raw: apt-get update -qq
+  #- name: Setup | Install python 2.7 since this is a Ubuntu 16 machine
+  #  raw: apt-get install -qq python2.7
 
   # Setup to users on the chh-test server
-  - name: Setup | create user chh_admin and chh_cms
+  - name: Setup | create user na_admin and na_cms
     command: useradd -m {{ item }} creates=/home/{{ item }}
     become: true
     become_method: sudo
@@ -39,8 +40,8 @@
       - '{{adminuser}}'
       - '{{cmsuser}}'
 
-  # Setup passwords for both user 'chh_admin' and 'chh_cms' on our chh-test server
-  - name: Setup | set passwords for chh_admin and chh_user
+  # Setup passwords for both user 'na_admin' and 'na_cms' on our chh-test server
+  - name: Setup | set passwords for na_admin and na_user
     shell: usermod -p $(echo '{{ item.createpassword }}' | openssl passwd -1 -stdin) {{ item.createuser }}
     become: true
     become_method: sudo
