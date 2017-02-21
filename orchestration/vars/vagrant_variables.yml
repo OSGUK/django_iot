@@ -5,11 +5,11 @@ ubuntu_common_ssh_port: 22                                                      
 
 rootuser: 'root'
 rootpassword_NoisyAtom-Portal: '5AJodkqyJ9y6d3FV7VMZyorbF7vNmFsBWux4Ewiw'
-rootpassword_NoisyAtom-Portal_Ubuntu14: ''
+rootpassword_NoisyAtom-Portal_Ubuntu14: 'KU23fRdABcVn9SM5XW5rGcQf4PDrQu7rLD2YMCdtqJQ1sTcF26tx9mhCpg37'
 adminuser: 'na_admin'
-adminpassword: ''
+adminpassword: 'QK4ZK7fB8hQJnAHqgWUYM8ekhFBv4NugykgHfCRD'
 cmsuser: 'na_cms'
-cmspassword: ''
+cmspassword: '5rtzFRmBFqhMAfskTuTw3Q5r23JVCELCNTqKobmy'
 
 dbname: na_db_20022017                                   # this is used to setup the database name in postgres
 dbuser: na_db_user                                       # this is used to setup the database user in postres

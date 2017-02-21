@@ -5,12 +5,12 @@ server {
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static-cdn/ {
-        root /home/chh_cms/HomeStartCambridge/;
+        root /home/na_cms/NoisyAtom/;
     }
 
     location / {
         include proxy_params;
-        proxy_pass http://unix:/home/chh_cms/HomeStartCambridge/cambr_proj/chhproject.sock;
+        proxy_pass http://unix:/home/na_cms/NoisyAtomPortal/noisyatom/naproject.sock;
     }
 
 }

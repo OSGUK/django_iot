@@ -14,7 +14,8 @@
 # SSH access
 ---
 
-- hosts: NoisyAtom-Portal
+#- hosts: NoisyAtom-Portal
+- hosts: NoisyAtomUbuntu14
   user: '{{rootuser}}'
   become: true                                               # This will tell ansible to become 'sudo' to issue commands on the machine
 
