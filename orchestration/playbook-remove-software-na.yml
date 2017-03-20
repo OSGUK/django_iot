@@ -95,7 +95,7 @@
       become_user: root
       file: path=/etc/nginx/sites-enabled/naecommerce state=absent force=true
 
-    - name: Remove chhecommerce from Nginx Config Dir 'sites-available'
+    - name: Remove naecommerce from Nginx Config Dir 'sites-available'
       become_user: root
       file: path=/etc/nginx/sites-available/naecommerce state=absent
 
@@ -103,7 +103,7 @@
       become_user: root
       file: path=/etc/init/gunicorn.conf state=absent
 
-    - name: Remove Directory HomeStartCambridge and home_start_venv
+    - name: Remove Directory NoisyAtomPortal and noisy_atom_venv
       become_user: '{{ cmsuser }}'
       file: path=~/{{ item }} state=absent
       with_items:

@@ -202,9 +202,9 @@
     # Map the configuration files directory in Nginx to the enabled directory.
     # This has the effect of enabling the configuration folder to be mapped to
     # the live working path.
-    - name: Link ffecomerce Nginx config file in sites-available to sites-enabled
+    - name: Link naecomerce Nginx config file in sites-available to sites-enabled
       become_user: root
-      file: src=/etc/nginx/sites-available/chhecommerce dest=/etc/nginx/sites-enabled/chhecommerce state=link
+      file: src=/etc/nginx/sites-available/naecommerce dest=/etc/nginx/sites-enabled/naecommerce state=link
       notify: Reload Nginx to enable the site
 
     # Reload Nginx to fully enable our site
