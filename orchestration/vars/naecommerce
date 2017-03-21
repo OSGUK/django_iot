@@ -5,7 +5,7 @@ server {
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static-cdn/ {
-        root /home/na_cms/NoisyAtom/;
+        root /home/na_cms/NoisyAtomPortal/;
     }
 
     location / {
