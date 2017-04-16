@@ -60,6 +60,11 @@
 
 # Cambridge Home Help Digital Ocean Test Server
 # This machine is setup from Nicholas Herriot's account and running Ubuntu 14.5 LTR
+<<<<<<< HEAD
+[chh-dev]
+104.236.14.123
+
+=======
 #[chh-dev]
 #104.236.14.123
 
@@ -88,6 +93,7 @@
 
 [NoisyAtom-Portal:vars] # Ubuntu 16.04 hosts without python2
 ansible_python_interpreter=/usr/bin/python2.7
+>>>>>>> d356e1e40afb746e36f03c588b5d68664b48e41e
 
 
 
@@ -132,6 +138,11 @@ ansible_ssh_user=root
 
 
 # Variables that will be used on chh-dev
+<<<<<<< HEAD
+[chh-dev:vars]
+ansible_ssh_user=root
+
+=======
 #[chh-dev:vars]
 #ansible_ssh_user=root
 
@@ -140,6 +151,7 @@ ansible_ssh_user=root
 
 [NoisyAtom-Portal]
 ansible_ssh_user=root
+>>>>>>> d356e1e40afb746e36f03c588b5d68664b48e41e
 
 # Variables that will be applied to all free flow wines VM servers
 [ffw-all-vm:vars]

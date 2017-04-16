@@ -1,4 +1,4 @@
-Read Me for running of Vagrant to create VM's for AlfaAesar
+Read Me for running of Vagrant to create VM's for Noisy Atom
 ================
 
 
