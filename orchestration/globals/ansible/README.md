@@ -63,15 +63,17 @@ Ansible will try and connect as 'root' during setup. So you will need to run the
 However you don't need to use 'root' password. You can manually add your key to any account with the
 (You should have already created your pub/private key on your local machine) the commands
 
+Next place your id_rsa.pub file inside the 'vars' directory. Your file is inside ~/.ssh directory.
+
 /> ssh-copy-id root@104.236.14.123
 
 You will be prompted for the root password. See your admin guy to get the root password and allow you to add
 your public key to the remote machine.
 
-Next place your id_rsa.pub file inside the 'vars' directory. Your file is inside ~/.ssh directory.
 
 
-### 2) 3) 4) 5) Ansible Does Heavy Lifint
+
+### 2) 3) 4) 5) Ansible Does Heavy Lifing
 
 Next you need to run the script. If you followed the instructions all should go well. So from your orchestration
 directory run the setup file by doing:
