@@ -44,6 +44,16 @@
 
   tasks:
 
+    - name: Remove Directory NoisyAtomPortal and noisy_atom_venv
+      become_user: '{{ cmsuser }}'
+      file: path=~/{{ item }} state=absent
+      with_items:
+        - '{{environment_name}}'
+        - '{{project_root_name}}'
+
+
+
+
     # Stop Nginx process and remove from memory
     - name: Stop Nginx to remove from memory
       become_user: root
@@ -61,9 +71,51 @@
 
 
 
+    # Make sure psycopg2 is present
+    - name: Ensure psycopg2 is present
+      apt: name={{item}} state=present
+      with_items:
+        - python-pip
+        - python-dev
+        - python-setuptools
+        - python-tk
+        - liblcms2-dev
+        - libfreetype6-dev
+        - libjpeg8-dev
+        - libpq-dev
+        - libtiff5-dev
+        - libwebp-dev
+        - postgresql
+        - postgresql-contrib
+        - nginx
+        - python-psycopg2
+        - git
+        - tcl8.6-dev
+        - tk8.6-dev
+        - zlib1g-dev
+
+
+#        - postgresql
+#        - postgresql-contrib
+#        - python-psycopg2
+
+
+    # This starts our postgres sql database
+    - name: Starting Postgres DB
+      service: name={{item}} state=started enabled=yes
+      with_items:
+        - postgresql
+
+    # This set up postgres for the first time
+    - name: Setup Postgres DB
+      become_user: postgres
+      postgresql_db: name='{{dbname}}'
+
+
 
     # Drop the postgres database before removing software components
     - name: Drop the Postgres database
+#      apt: name=psycopg2 state=present
       become_user: postgres
       postgresql_db: name={{dbname}} state=absent
 
@@ -102,12 +154,3 @@
     - name: Remove gunicorn config file gunicorn.conf from etc/init directory
       become_user: root
       file: path=/etc/init/gunicorn.conf state=absent
-
-    - name: Remove Directory NoisyAtomPortal and noisy_atom_venv
-      become_user: '{{ cmsuser }}'
-      file: path=~/{{ item }} state=absent
-      with_items:
-        - '{{environment_name}}'
-        - '{{project_root_name}}'
-
-
