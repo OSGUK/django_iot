@@ -7,9 +7,8 @@
 # />  ansible-playbook setup.yml  --ask-pass
 
 ---
-#- hosts: chh-dev
-#- hosts: NoisyAtom-Portal
-- hosts: NoisyAtomUbuntu14
+- hosts: NoisyAtom-Portal
+#- hosts: NoisyAtomUbuntu14
   user: root
   #gather_facts: False
 

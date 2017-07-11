@@ -8,7 +8,6 @@
 # />  ansible-playbook playbook-remove-software-chh.yml
 #
 ---
-#- hosts: chh-dev
 - hosts: NoisyAtomUbuntu14
   user: '{{adminuser}}'
   become: true                                                # This will tell ansible to become 'sudo' to issue commands on the machine
