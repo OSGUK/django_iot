@@ -23,6 +23,7 @@ admin.autodiscover()
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('cms.urls', namespace='cms')),
+    url(r'^rolepoint/', include('rolepoint.urls', namespace='rolepoint')),
 ]
 
 

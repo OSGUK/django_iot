@@ -68,6 +68,7 @@ if socket.gethostname() in DEVELOPER_MACHINES:
         'catalog',
         'cms.apps.CmsConfig',
         'qrcode',
+        'rolepoint',
     ]
 
 # **************************************************************************************************************************
