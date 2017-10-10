@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 import socket
+import json
+from pprint import pprint
 
 # A list of development machines that will make sure we use a 'non production' settings file. Add your machine name to
 # the list to make this settings file a 'dev' build only.
@@ -27,6 +29,15 @@ PROJECT_ROOT = os.path.join(BASE_DIR, 'noisyatom')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'needs-to-change'
+
+# Temporary reading of json file as a python dict so that it can be used in
+# our program. This is just a prototype.
+# TODO Change this inot either 1) a fixture being read into a db 2) elastic search used to search the JSON
+with open('rolepoint/exercise-data.json') as json_data:
+    ROLEPOINT_DATA = json.load(json_data)
+
+for key in ROLEPOINT_DATA:
+    pprint(key['name'])
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # Add your own computer name to this list of 'gethostname()' functions to get
