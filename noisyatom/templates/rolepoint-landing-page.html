@@ -151,9 +151,10 @@
 					<h1 class="title">Rolepoint Search Database.</h1>
                     <h4>Rolepoint search. Type in the name of the person you wish to search for.</h4>
                     <br />
-                    <form action="/search_page">
+                    <form action="search_page/" method="post">
+                        {% csrf_token %}
                         Name: <input type="text"
-                                     name="fname"
+                                     name="rp_search"
                                      style="background-color:white;
                                             color: #101010;" >
                         <input type="submit" value="Submit">
