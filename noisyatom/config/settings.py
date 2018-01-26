@@ -102,8 +102,11 @@ else:
         'localhost',
         '127.0.0.1',
         'noisyatom.com',
+        'www.noisyatom.com'
         'noisyatom.co.uk',
+        'www.noisyatom.co.uk',
         'noisyatom.tech',
+        'www.noisyatom.tech'
         '104.236.14.123',
         '46.101.19.29',
         ]
