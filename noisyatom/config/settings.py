@@ -15,7 +15,7 @@ import socket
 # A list of development machines that will make sure we use a 'non production' settings file. Add your machine name to
 # the list to make this settings file a 'dev' build only.
 
-DEVELOPER_MACHINES = ['Zenbook-UX32A', 'kieran', 'dilmac-VB', 'dilmac', 'my-mac-machine', 'my-linux-machine']
+DEVELOPER_MACHINES = ['Zenbook-UX32A', 'kieran', 'dilmac-VB', 'dilmac', 'my-mac-machine', 'my-linux-machine', 'nb-909']
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -77,6 +77,7 @@ if socket.gethostname() in DEVELOPER_MACHINES:
         'blogs.apps.BlogsConfig',
         'catalog.apps.CatalogConfig',
         'cms.apps.CmsConfig',
+        'iot_device.apps.IotDeviceConfig',
         'qrcode',
         'ee_test',
         # Third part library
@@ -148,6 +149,7 @@ else:
         'blogs.apps.BlogsConfig',
         'catalog.apps.CatalogConfig',
         'cms.apps.CmsConfig',
+        'iot_device.apps.IotDeviceConfig',
         'qrcode',
         'ee_test',
         # Third part library
