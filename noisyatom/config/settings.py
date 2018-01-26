@@ -106,7 +106,7 @@ else:
         'noisyatom.co.uk',
         'www.noisyatom.co.uk',
         'noisyatom.tech',
-        'www.noisyatom.tech'
+        'www.noisyatom.tech',
         '104.236.14.123',
         '46.101.19.29',
         ]
