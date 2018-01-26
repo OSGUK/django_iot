@@ -2,7 +2,12 @@ from django.db import models
 from account.models import Company
 from qrcode.models import QRcode
 from catalog.models import Category
-# Create your models here.
+from pygments.lexers import get_all_lexers              # A serializer library to allow us to serialize our DB objects
+from pygments.styles import get_all_styles              # which will be used for our REST interface
+
+LEXERS = [item for item in get_all_lexers() if item[1]]
+LANGUAGE_CHOICES = sorted([(item[1][0], item[0]) for item in LEXERS])
+STYLE_CHOICES = sorted((item, item) for item in get_all_styles())
 
 # A simple SQL structure to store the registration of an IoT Device. Most parameters are optional. The only mandatory
 # part is the local IP address and the MAC address of the device. The MAC address is unique. The local IP address is
