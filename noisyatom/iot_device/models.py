@@ -1,6 +1,6 @@
 from django.db import models
 from account.models import Company
-from qrcode.models import QRcode
+
 #from catalog.models import Category
 from pygments.lexers import get_all_lexers              # A serializer library to allow us to serialize our DB objects
 from pygments.styles import get_all_styles              # which will be used for our REST interface
@@ -15,37 +15,6 @@ STYLE_CHOICES = sorted((item, item) for item in get_all_styles())
 # part is the local IP address and the MAC address of the device. The MAC address is unique. The local IP address is
 # a way to find this device in your local network for interacting with it. This is not meant to be a server which
 # pushes and pulls data between the user and the device. This is more like a location register
-
-class IoTDevice(models.Model):
-    device_name = models.CharField(max_length=50, help_text='A human readable name for the device.')
-    device_id = models.CharField(max_length=6, help_text='The MAC address of the device', unique=True)
-    slug = models.SlugField(max_length=50, unique=True, help_text='Unique value for product page URL, created from name. Created by system on registration', null=True, blank=True)
-    power = models.BigIntegerField(help_text='The normal power consumption of the device when working', default=0, null=True)
-    device_owner = models.EmailField(max_length=255, help_text='The email of the owner. Optional field', null=True, blank=True)
-    local_ip = models.GenericIPAddressField(default="0.0.0.0", help_text='The current local IP of the device')
-    multicast_address = models.CharField(max_length=255, default="raspberypi.local", help_text="This is the multicast DNS name of the device within it's local domain")
-    two_d_bar_code = models.OneToOneField(
-        QRcode,
-        on_delete=models.CASCADE,
-        primary_key=True,
-        null=False,
-        blank=True,
-        default=0,
-    )
-
-    # def __str__(self):
-    #     return self.device_id
-    #
-    # def get_absolute_url(self):
-    #     return reverse('IoTDevice:detail', kwargs={'slug': self.slug})
-    #
-    # class Meta:
-    #     db_table = 'Internet of Things Device'
-    #     ordering = ['-created_at']
-    #     verbose_name_plural = 'Internet of Things Devices'
-    #
-    # def __unicode__(self):
-    #     return self.device_id
 
 
 class IoTMachine(models.Model):
@@ -76,7 +45,3 @@ class IoTMachine(models.Model):
         ordering = ['-created_at']
         verbose_name_plural = 'IoT Machines'
 
-
-class Question(models.Model):
-    question_text = models.CharField(max_length=200)
-    pub_date = models.DateTimeField('date published')
