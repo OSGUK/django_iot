@@ -85,7 +85,6 @@ if socket.gethostname() in DEVELOPER_MACHINES:
         'markdown_deux',
         'pagedown',
         'rest_framework',
-        'snippets.apps.SnippetsConfig',
     ]
 
 # **************************************************************************************************************************
@@ -163,7 +162,6 @@ else:
         'markdown_deux',
         'pagedown',
         'rest_framework',
-        'snippets.apps.SnippetsConfig',
     ]
 
 DEFAULT_FROM_EMAIL = "Noisy Atom <info@noisyatom.com>"

@@ -1,19 +1,19 @@
 from rest_framework import serializers
-from iot_device.models import IoT_Device, LANGUAGE_CHOICES, STYLE_CHOICES
+from iot_device.models import IoTMachine, LANGUAGE_CHOICES, STYLE_CHOICES
 
 
-class IoTDeviceSerializer(serializers.Serializer):
-    device_id = serializers.CharField(read_only=True)
-    device_name = serializers.CharField(required=False, allow_blank=True, max_length=50)
-    local_ip = serializers.IPAddressField(required=True)
-    multicast_address = serializers.CharField(required=True)
-    bluetooth_address = serializers.CharField(max_length=6)
+class IoTMachineSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = IoTMachine
+        fields = ('device_id', 'device_name', 'local_ip', 'device_owner', 'multicast_address')
+
 
     def create(self, validated_data):
         """
         Create and return a new `IoT Device` instance, given the validated data.
         """
-        return IoT_Device.objects.create(**validated_data)
+        return IoTMachine.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
         """
@@ -26,5 +26,3 @@ class IoTDeviceSerializer(serializers.Serializer):
         instance.bluetooth_address = validated_data.get('bluetooth_address', instance.bluetooth_address)
         instance.save()
         return instance
-
-    
