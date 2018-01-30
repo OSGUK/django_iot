@@ -12,7 +12,7 @@ import ipaddress
 
 
 @csrf_exempt                                            # We need to do this so that a simple device can register.
-def iot_machines_list(request):                          # TODO Add some type of authentication for iot devices
+def iot_machines_list(request):                         # TODO Add some type of authentication for iot devices
     """
     List all machines, or create a new iot machine.
     """
@@ -23,6 +23,36 @@ def iot_machines_list(request):                          # TODO Add some type of
 
     elif request.method == 'POST':
         data = JSONParser().parse(request)
+        serializer = IoTMachineSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+
+
+@csrf_exempt                                            # We need to do this so that a simple device can register.
+def iot_machines_register(request):                     # TODO Add some type of authentication for iot devices
+    """
+    :param request: JSON {
+                    device_id:      mac_adress e.g. 98:83:89:3a:96:a5
+                    device_name:    "any text string"
+                    local_ip:       IPV4 or IPV6 e.g. 192.168.0.1
+                    }
+
+    :return: HttpResponseForbidden, HttpResponse, HttpResponseRedirect
+
+    Register an IoT Machine based on it's MAC address.
+    If this is a POST we check it's unique. Verify the JSON package. And register the machine
+
+    If this is a PUT we check it exists. verify the JSON package. And update the machine.
+
+    TODO - Authentication & Authorization!
+
+    """
+
+    if request.method == 'POST':
+        data = JSONParser().parse(request)
+        print("We got the following data in the request: {}".format(data))
         serializer = IoTMachineSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
@@ -53,7 +83,7 @@ def iot_machine_find(request, mac_address):
         ipaddress.IPv4Address(iot_device.local_ip)
     except ValueError:
         # TODO Paint a nice screen and show the user the device exists but routing is broken
-        print("There was an issue with the stored IP address for this device - handle it an carry on")
+        print("There was an issue with the stored IP address for the device: {} - handle it an carry on".format(iot_device.mac_address))
         return Http404
 
     # Happy path - direct the user to the device
