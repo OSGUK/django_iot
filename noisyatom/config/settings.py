@@ -79,7 +79,6 @@ if socket.gethostname() in DEVELOPER_MACHINES:
         'cms.apps.CmsConfig',
         'iot_device.apps.IotDeviceConfig',
         'qrcode',
-        'ee_test',
         # Third part library
         'bootstrap4',
         'markdown_deux',
@@ -156,7 +155,6 @@ else:
         'cms.apps.CmsConfig',
         'iot_device.apps.IotDeviceConfig',
         'qrcode',
-        'ee_test',
         # Third part library
         'bootstrap4',
         'markdown_deux',

@@ -3,7 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
-from .models import IoTMachine
+from iot_device.models import IoTMachine
 from .serializers import IoTMachineSerializer
 from django.http import HttpResponse, HttpResponseRedirect, Http404, HttpResponseForbidden
 import ipaddress
@@ -16,6 +16,7 @@ def iot_machines_list(request):                         # TODO Add some type of 
     """
     List all machines, or create a new iot machine.
     """
+
     if request.method == 'GET':
         iot_machines = IoTMachine.objects.all()
         iot_serializer = IoTMachineSerializer(iot_machines, many=True)
@@ -49,16 +50,33 @@ def iot_machines_register(request):                     # TODO Add some type of 
     TODO - Authentication & Authorization!
 
     """
+    data = JSONParser().parse(request)
 
+    # If it's a http post check the MAC is unique and register the machine
     if request.method == 'POST':
-        data = JSONParser().parse(request)
-        print("We got the following data in the request: {}".format(data))
+        print("We got the following POST data in the request: {}".format(data)) # TODO Remove print
         serializer = IoTMachineSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
 
+    # if it's a http put check the MAC exists and update values of the machine
+    if request.method == 'PUT':
+        print("We got the following PUT data in the request: {}".format(data))  # TODO Remove print
+
+        try:
+            iot_device = IoTMachine.objects.get(device_id=data['device_id'])
+            serializer = IoTMachineSerializer(iot_device, data=data)
+        except IoTMachine.DoesNotExist:
+            print("This device does not exist") # TODO Remove print
+            error={"device_id": "iot machine with this device id does not exist."}
+            return JsonResponse(error, status=404)              # Return a http resource not found error code
+
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
 
 
 @csrf_exempt
@@ -70,7 +88,7 @@ def iot_machine_find(request, mac_address):
     friendly page saying the machine is not active at the moment.
 
     """
-    print("Trying to find an IoT Machine and redirect locally with mac_address of: {}".format(mac_address))
+    print("Trying to find an IoT Machine and redirect locally with mac_address of: {}".format(mac_address)) # TODO Remove print
 
     # Make sure we can find the machine via it's mac address
     try:
@@ -83,7 +101,7 @@ def iot_machine_find(request, mac_address):
         ipaddress.IPv4Address(iot_device.local_ip)
     except ValueError:
         # TODO Paint a nice screen and show the user the device exists but routing is broken
-        print("There was an issue with the stored IP address for the device: {} - handle it an carry on".format(iot_device.mac_address))
+        print("There was an issue with the stored IP address for the device: {} - handle it an carry on".format(iot_device.mac_address)) # TODO Remove print
         return Http404
 
     # Happy path - direct the user to the device
@@ -92,16 +110,8 @@ def iot_machine_find(request, mac_address):
         scheme = 'http'                 # TODO make this a dynamic variable from settings or DB table
         path = 'machine'                # TODO make this a dynamic variable from settings or DB table
         remote_url = "{0}://{1}/{2}".format(scheme,iot_device.local_ip,path)
-        print("We found the device returning the IOT Local address: {}".format(remote_url))
+        print("We found the device returning the IOT Local address: {}".format(remote_url))     # TODO Remove print
         return HttpResponseRedirect(remote_url)
-
-    elif request.method == 'PUT':
-        data = JSONParser().parse(request)
-        serializer = IoTMachineSerializer(iot_device, data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=400)
 
     # If we get this far - we don't support other methods at the minute so reply with a forbidden.
     return HttpResponseForbidden
