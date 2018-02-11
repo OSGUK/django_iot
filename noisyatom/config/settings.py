@@ -35,6 +35,22 @@ if socket.gethostname() in DEVELOPER_MACHINES:
     print ("\n***** WARNING! This is a non-production build *****")
     DEBUG = True
 
+    # Set allowed hosts so that we can verify where requests are coming from.
+    ALLOWED_HOSTS = [
+        'localhost',
+        '127.0.0.1',
+        'noisyatom.com',
+        'www.noisyatom.com',
+        'noisyatom.co.uk',
+        'www.noisyatom.co.uk',
+        'noisyatom.tech',
+        'www.noisyatom.tech',
+        '104.236.14.123',
+        '46.101.19.29',
+        '192.168.110.121',
+        ]
+
+
     # Database
     # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
     # Setup the database as a developer machine
@@ -109,9 +125,10 @@ else:
         'www.noisyatom.tech',
         '104.236.14.123',
         '46.101.19.29',
+        '192.168.110.121',
         ]
 
-    DEBUG = False
+    DEBUG = True
 
     # Database
     # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
