@@ -108,8 +108,8 @@ def iot_machine_find(request, mac_address):
     if request.method == 'GET':
 
         scheme = 'http'                 # TODO make this a dynamic variable from settings or DB table
-        path = 'machine'                # TODO make this a dynamic variable from settings or DB table
-        remote_url = "{0}://{1}/{2}".format(scheme,iot_device.local_ip,path)
+        path = 'light'                # TODO make this a dynamic variable from settings or DB table
+        remote_url = "{0}://{1}/{2}".format(scheme, iot_device.local_ip, path)
         print("We found the device returning the IOT Local address: {}".format(remote_url))     # TODO Remove print
         return HttpResponseRedirect(remote_url)
 
